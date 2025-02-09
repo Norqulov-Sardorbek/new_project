@@ -108,10 +108,7 @@ class Todos:
 
     @staticmethod
     def update_todo(len):
-        todo_id =int( input('Enter todo id you want to update: '))
-        if todo_id >len:
-            print(Response(status='error',message='You are trying to update not exist todo'))
-            return
+        todo =input('Which todo you want to update (write one word from title): ')
         title=input('Enter new title: ')
         new_description = input('Enter new description: ')
         new_priority = priority_picker()
@@ -121,11 +118,11 @@ class Todos:
         SET SEARCH_PATH TO todo;
         UPDATE todos
         SET title=%s, description = %s, priority = %s
-        WHERE id = %s;
+        WHERE title ilike %s;
         '''
         with psycopg2.connect(**db_info) as conn:
             with conn.cursor() as cur:
-                cur.execute(update_query, (title,new_description, new_priority, todo_id))
+                cur.execute(update_query, (title,new_description, new_priority, f'%{todo}%'))
                 
                 if cur.rowcount == 0:
                     print( Response(status='error', message='No todo found with this ID to update.'))
@@ -134,20 +131,17 @@ class Todos:
                 return
 
     @staticmethod
-    def delete_todo(len):
-        todo_id=input('Which todo you want to updade: ')
-        if todo_id >len:
-            print(Response(status='error',message='You are trying to delete not exist todo'))
-            return
+    def delete_todo():
+        todo=input('Which todo you want to delete (write one word from title): ')
+        
         delete_query = '''
         SET SEARCH_PATH TO todo;
         DELETE FROM todos
-        WHERE id = %s;
+        WHERE title ilike %s;
         '''
         with psycopg2.connect(**db_info) as conn:
             with conn.cursor() as cur:
-                cur.execute(delete_query, (todo_id,))
-                
+                cur.execute(delete_query, (f'%{todo}%',))
                 if cur.rowcount == 0:
                     return Response(status='error', message='No todo found with this ID to delete.')
                 return Response(status='success', message='Todo deleted successfully!')

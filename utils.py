@@ -47,6 +47,11 @@ def role_pick():
     else:
         print('You have to chose one of them!')
 
+def displayer(response):
+    if isinstance(response, list):
+                for index, todo in enumerate(response):
+                    print(f'-------------{index+1}-todo---------------')
+                    print(f'Todo\'s title is: {todo[1]} \nTodo\'s description is: {todo[2]} \nPriority is: {todo[3]}')
 
 def validation(user):
     if not user.username:

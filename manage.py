@@ -1,6 +1,7 @@
 from models import Todos,Singleton
 from auth import login,register
-from db import get_all_todos,get_one_todo
+from db import get_all_todos
+from utils import displayer
 
 def main():
     while True:
@@ -24,30 +25,21 @@ def main():
             if not user:
                 continue
             response = get_all_todos(user)
-            if isinstance(response, list):
-                for index, todo in enumerate(response):
-                    print(f'-------------{index+1}-todo---------------')
-                    print(f'Todo\'s title is: {todo[1]} \nTodo\'s description is: {todo[2]} \nPriority is: {todo[3]}')
+            displayer(response)
         elif answer == '3':
             user=Singleton.get_instance()
             if not user:
                 continue
             response = get_all_todos(user)
-            if isinstance(response, list):
-                for index, todo in enumerate(response):
-                    print(f'-------------{index+1}-todo---------------')
-                    print(f'Todo\'s title is:{todo[0]}  {todo[1]} \nTodo\'s description is: {todo[2]} \nPriority is: {todo[3]}')
+            displayer(response)
             Todos.update_todo(len(response))
         elif answer == '4':
             user=Singleton.get_instance() 
             if not user:
                 continue
             response = get_all_todos(user)
-            if isinstance(response, list):
-                for index, todo in enumerate(response):
-                    print(f'-------------{index+1}-todo---------------')
-                    print(f'Todo\'s title is: {todo[1]} \nTodo\'s description is: {todo[2]} \nPriority is: {todo[3]}')
-            Todos.delete_todo(len(response))
+            displayer(response)
+            Todos.delete_todo()
         elif answer == '5':
             login()
         elif answer == '6':
