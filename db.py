@@ -3,6 +3,7 @@ from models import db_info
 from utils import Response
 
 
+
 def get_all_todos(user):
     if user.role == 'superuser':
         get_todo_query = '''

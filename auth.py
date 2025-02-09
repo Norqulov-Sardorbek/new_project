@@ -1,14 +1,6 @@
-import psycopg2
 from utils import Response, hash_password, match_password, role_pick, validation
 from models import User, Singleton
 
-db_info = {
-    "database": "lesson",
-    "user": "postgres",
-    "password": "123",
-    "host": "localhost",
-    "port": 5432,
-}
 
 def register():
     username = input('Enter new username: ')

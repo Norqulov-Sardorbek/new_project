@@ -62,4 +62,3 @@ def validation(user):
         print(Response(status='error',message='Password is required'))
         return
     return 'eflkamfl'
-    

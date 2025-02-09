@@ -103,7 +103,6 @@ class Todos:
         with psycopg2.connect(**db_info) as conn:
             with conn.cursor() as cur:
                 cur.execute(insert_query, (todo.title, todo.description, todo.priority,user.id))
-                
                 print(Response(status='success', message=f"Todo saved successfully !"))
 
     @staticmethod
