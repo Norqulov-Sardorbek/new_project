@@ -7,12 +7,12 @@ class Response:
          return self.message
 
 
-    
+
 
 def hash_password(raw_password: str):
     raw_password = raw_password.encode('utf-8')
     salt = bcrypt.gensalt()
-    return bcrypt.hashpw(raw_password, salt).decode('utf-8')
+    bcrypt.hashpw(raw_password, salt).decode('utf-8')
 
 
 def match_password(raw_password: str, hashed_password):

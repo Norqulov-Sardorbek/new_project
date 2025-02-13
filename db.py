@@ -13,7 +13,7 @@ def get_all_todos(user):
         query_params = ()
     else:
         get_todo_query = '''
-        SET search_path TO todo;
+        SET SEARCH_PATH TO todo;
         SELECT * FROM todos
         WHERE userid = (SELECT id FROM user_info WHERE username = %s);
         '''
