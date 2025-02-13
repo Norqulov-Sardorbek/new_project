@@ -46,13 +46,12 @@ def user_menu():
 def admin_menu():
     while True:
         print('-----Admin Menu-----')
-        print('1=> Set as admin')
-        print('2=> Create Todos')
-        print('3=> Read Todos')
-        print('4=> Update todos')
-        print('5=> Delete todos')
-        print('6=> Update User\'s info')
-        print('7=> Delete User\'s')
+        print('1 => Set as admin')
+        print('2 => Create Todos')
+        print('3 => Read Todos')
+        print('4 => Update todos')
+        print('5 => Delete todos')
+        print('6 => Delete User\'s')
         print('q=> Logout')
         answer = input('Enter your choice: ')
         if answer == '1':
@@ -83,8 +82,6 @@ def admin_menu():
             displayer(response)
             Todos.delete_todo()
         elif answer == '6':
-            pass
-        elif answer == '7':
             displayer(get_all_user(),False)
             username=input('Enter username which you want to make superuser: ')
             del_user(username)
