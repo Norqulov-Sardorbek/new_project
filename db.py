@@ -2,6 +2,19 @@ import psycopg2
 from models import db_info
 from utils import Response
 
+def get_all_user():
+    get_todo_query = '''
+        SET search_path TO todo;
+        SELECT * FROM user_info where role='user';
+        '''
+    with psycopg2.connect(**db_info) as conn:
+        with conn.cursor() as cur:
+            cur.execute(get_todo_query)
+            todos = cur.fetchall()
+            if not todos:
+                print(Response(status='error', message='No saved users yet!'))
+            return todos
+    
 
 
 def get_all_todos(user):

@@ -1,14 +1,11 @@
-from utils import Response, hash_password, match_password, role_pick, validation
+from utils import Response, hash_password, match_password,  validation
 from models import User, Singleton
 
 
 def register():
     username = input('Enter new username: ')
     password = input('Enter new password: ')
-    role = role_pick()
-    
-    if role is None:
-        return
+    role = 'user'
     
     hashed_password = hash_password(password)
     user = User(username, hashed_password, role)
@@ -39,3 +36,5 @@ def login():
     
 
 
+def logout():
+    Singleton._instance=None
